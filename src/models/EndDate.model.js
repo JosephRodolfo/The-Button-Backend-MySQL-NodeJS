@@ -1,8 +1,8 @@
 
 const sql = require("../services/db");
-const EndDate = function(datedata) {
+const EndDate = function(information) {
 
-    this.datedata = datedata
+    this.datedata = information.datedata
   };
   
 
@@ -22,6 +22,46 @@ EndDate.findById = (id, result) => {
       result({ kind: "not_found" }, null);
     });
   };
+
+
+  EndDate.create = (newDate, result) => {
+    sql.query("INSERT INTO dates SET ?", newDate, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+      console.log("created end date: ", { id: res.insertId, ...newDate });
+      result(null, { id: res.insertId, ...newDate });
+    });
+  };
+
+  EndDate.getAll = (date, result) => {
+    let query = "SELECT * FROM dates";
+    if (date) {
+      query += ` WHERE date LIKE '%${date}%'`;
+    }
+    sql.query(query, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+      console.log("end dates: ", res);
+      result(null, res);
+    });
+
+
+    // connection.query('SELECT * FROM dates', (err,rows) => {
+//   if(err) throw err;
+
+//   console.log('Data received from Db:');
+//   console.log(rows);
+// });
+  };
+
+
+
 
   module.exports =  EndDate
   

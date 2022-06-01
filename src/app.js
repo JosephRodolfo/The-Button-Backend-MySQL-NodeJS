@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
-const enddateRouter = require('./routes/enddate')
-// const connection = require('./services/db')
+const enddateRouter = require('./routes/endDates')
 
 
 
@@ -23,10 +22,8 @@ const enddateRouter = require('./routes/enddate')
 
 
 
-app.use(enddateRouter)
 app.use(express.json());
-
-
+app.use(enddateRouter)
 
 
 
