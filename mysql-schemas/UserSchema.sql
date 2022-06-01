@@ -1,0 +1,10 @@
+USE enddate;
+
+CREATE TABLE user (
+  	id int(11) NOT NULL AUTO_INCREMENT,
+    	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	email int(11),
+  PRIMARY KEY (id)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5;
+ SET time_zone='+00:00';
+

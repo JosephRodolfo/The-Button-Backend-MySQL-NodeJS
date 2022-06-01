@@ -1,5 +1,5 @@
 const EndDate = require("../models/EndDate.model");
-
+const getNewRandomDate = require('../utils/getNewRandomDate')
 exports.findOne = (req, res) => {
   EndDate.findById(req.params.id, (err, data) => {
     if (err) {
@@ -24,8 +24,10 @@ exports.create = (req, res) => {
     });
   }
 
+  let newEndDate = getNewRandomDate();
   const endDate = new EndDate({
-    datedata: req.body.datedata,
+    // datedata: req.body.datedata,
+    datedata: newEndDate,
   });
 
   EndDate.create(endDate, (err, data) => {
@@ -34,7 +36,7 @@ exports.create = (req, res) => {
         message:
           err.message || "Some error occurred while creating the end date.",
       });
-    else res.send(...data);
+    else res.send({...data});
   });
 };
 
