@@ -11,7 +11,7 @@ EndDate.findById = (id, result) => {
       return;
     }
     if (res.length) {
-      console.log("found endDate: ", res[0]);
+      // console.log("found endDate: ", res[0]);
       result(null, res[0]);
       return;
     }
@@ -30,7 +30,7 @@ EndDate.findLast = (result) => {
         return;
       }
       if (res.length) {
-        console.log("found endDate: ", res[0]);
+        // console.log("found endDate: ", res[0]);
         result(null, res[0]);
         return;
       }
@@ -46,7 +46,7 @@ EndDate.create = (newDate, result) => {
       result(err, null);
       return;
     }
-    console.log("created end date: ", { id: res.insertId, ...newDate });
+    // console.log("created end date: ", { id: res.insertId, ...newDate });
     result(null, { id: res.insertId, ...newDate });
   });
 };
@@ -62,7 +62,7 @@ EndDate.getAll = (date, result) => {
       result(null, err);
       return;
     }
-    console.log("end dates: ", res);
+    // console.log("end dates: ", res);
     result(null, res);
   });
 };

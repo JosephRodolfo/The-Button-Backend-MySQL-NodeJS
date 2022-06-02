@@ -24,7 +24,8 @@ exports.findAll = (req, res) => {
     }
   
     const user = new User({
-      name: req.body.email
+      address: req.body.address,
+      score: req.body.score
     });
   
     User.create(user, (err, data) => {
