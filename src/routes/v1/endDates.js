@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const endDates = require('../controllers/endDates.controller')
-
+// const endDates = require('../controllers/endDates.controller')
+const endDates = require('../../controllers/endDates.controller')
 
 
 

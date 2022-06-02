@@ -1,6 +1,7 @@
 const sql = require("../services/db");
-const User = function (email) {
-  this.datedata = email;
+const User = function (information) {
+  //name is just a placeholder until I use emails or ethereum addresses
+  this.name = information.name;
 };
 
 User.create = (newUser, result) => {
@@ -26,7 +27,7 @@ User.create = (newUser, result) => {
         result(null, err);
         return;
       }
-      console.log("end dates: ", res);
+      console.log("users: ", res);
       result(null, res);
     });
   };
