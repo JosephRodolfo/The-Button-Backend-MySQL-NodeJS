@@ -37,3 +37,14 @@ exports.findAll = (req, res) => {
       else res.send({...data});
     });
   };
+
+  exports.deleteAll = (req, res) => {
+    User.deleteAll((err, data) => {
+      if (err)
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while deleting users.",
+        });
+      else res.send(data);
+    });
+  };

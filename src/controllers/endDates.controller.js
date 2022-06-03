@@ -1,5 +1,5 @@
 const EndDate = require("../models/EndDate.model");
-const getNewRandomDate = require('../utils/getNewRandomDate')
+const getNewRandomDate = require("../utils/getNewRandomDate");
 exports.findOne = (req, res) => {
   EndDate.findById(req.params.id, (err, data) => {
     if (err) {
@@ -16,7 +16,6 @@ exports.findOne = (req, res) => {
   });
 };
 
-
 exports.findLastCreated = (req, res) => {
   EndDate.findLast((err, data) => {
     if (err) {
@@ -26,7 +25,7 @@ exports.findLastCreated = (req, res) => {
         });
       } else {
         res.status(500).send({
-          message: "Error retrieving last inserted end date"
+          message: "Error retrieving last inserted end date",
         });
       }
     } else res.send(data);
@@ -34,7 +33,6 @@ exports.findLastCreated = (req, res) => {
 };
 
 exports.create = (req, res) => {
-
   // if (!req.body) {
   //   res.status(400).send({
   //     message: "Content can not be empty!",
@@ -53,20 +51,29 @@ exports.create = (req, res) => {
         message:
           err.message || "Some error occurred while creating the end date.",
       });
-    else res.send({...data});
+    else res.send({ ...data });
   });
 };
 
 exports.findAll = (req, res) => {
-
   const date = req.query.date;
   EndDate.getAll(date, (err, data) => {
     if (err)
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving end dates."
+          err.message || "Some error occurred while retrieving end dates.",
       });
     else res.send(data);
   });
+};
 
+exports.deleteAll = (req, res) => {
+  EndDate.deleteAll((err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while deleting end dates.",
+      });
+    else res.send(data);
+  });
 };

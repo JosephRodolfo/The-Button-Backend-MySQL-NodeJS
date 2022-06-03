@@ -67,4 +67,15 @@ EndDate.getAll = (date, result) => {
   });
 };
 
+EndDate.deleteAll = (result) => {
+  sql.query("TRUNCATE dates", (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+    result(null, res);
+  });
+};
+
 module.exports = EndDate;

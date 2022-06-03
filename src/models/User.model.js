@@ -16,7 +16,7 @@ User.create = (newUser, result) => {
       result(err, null);
       return;
     }
-    console.log("created end date: ", { id: res.insertId, ...newUser });
+    // console.log("created end date: ", { id: res.insertId, ...newUser });
     result(null, { id: res.insertId, ...newUser });
   });
 };
@@ -32,7 +32,18 @@ User.getAll = (user, result) => {
       result(null, err);
       return;
     }
-    console.log("users: ", res);
+    // console.log("users: ", res);
+    result(null, res);
+  });
+};
+
+User.deleteAll = (result) => {
+  sql.query("TRUNCATE user", (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
     result(null, res);
   });
 };
