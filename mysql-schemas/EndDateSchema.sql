@@ -3,9 +3,11 @@ USE enddate;
 
 CREATE TABLE dates (
   id int(11) NOT NULL AUTO_INCREMENT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	datedata int(11) NOT NULL,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+ SET time_zone='+00:00';
 
 INSERT INTO dates (id, datedata) VALUES
 (1, 1234567);

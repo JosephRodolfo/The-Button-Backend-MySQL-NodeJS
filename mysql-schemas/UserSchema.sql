@@ -2,7 +2,7 @@ USE enddate;
 
 CREATE TABLE user (
   	id int(11) NOT NULL AUTO_INCREMENT,
-    	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	score int(11) NOT NULL,
 	ethereum_address VARCHAR(100) NOT NULL,
   PRIMARY KEY (id)
