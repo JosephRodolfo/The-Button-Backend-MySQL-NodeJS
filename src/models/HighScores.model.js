@@ -4,7 +4,7 @@ const HighScores = function (table) {
 };
 HighScores.copyTable = (result) => {
   sql.query(
-   `CREATE TABLE highScores AS SELECT * FROM user;`,
+   `CREATE TABLE IF NOT EXISTS highScores AS SELECT * FROM user;`,
     (err, res) => {
         if (err) {
             console.log("error: ", err);
@@ -18,7 +18,7 @@ HighScores.copyTable = (result) => {
 
 HighScores.dropTable = (result) => {
     sql.query(
-      `DROP TABLE highScores`,
+      `DROP TABLE IF EXISTS highScores`,
       (err, res) => {
           if (err) {
               console.log("error: ", err);
