@@ -2,6 +2,7 @@ const express = require('express');
 const endDatesRoute = require('./endDates')
 const userRoute = require('./user')
 const highScoresRoute = require('./highScores')
+const configurationRoute = require('./configuration')
 const router = express.Router();
 
 const defaultRoutes = [
@@ -18,6 +19,10 @@ const defaultRoutes = [
       {
         path: '/highScores',
         route: highScoresRoute
+      },
+      {
+        path: '/configuration',
+        route: configurationRoute
       },
 
 

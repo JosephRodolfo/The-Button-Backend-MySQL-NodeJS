@@ -33,15 +33,10 @@ exports.findLastCreated = (req, res) => {
 };
 
 exports.create = (req, res) => {
-  // if (!req.body) {
-  //   res.status(400).send({
-  //     message: "Content can not be empty!",
-  //   });
-  // }
+
 
   let newEndDate = getNewRandomDate();
   const endDate = new EndDate({
-    // datedata: req.body.datedata,
     datedata: newEndDate,
   });
 

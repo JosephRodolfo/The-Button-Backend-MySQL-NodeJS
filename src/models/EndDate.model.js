@@ -15,7 +15,6 @@ EndDate.findById = (id, result) => {
       result(null, res[0]);
       return;
     }
-    // not found Tutorial with the id
     result({ kind: "not_found" }, null);
   });
 };
@@ -46,7 +45,6 @@ EndDate.create = (newDate, result) => {
       result(err, null);
       return;
     }
-    // console.log("created end date: ", { id: res.insertId, ...newDate });
     result(null, { id: res.insertId, ...newDate });
   });
 };
