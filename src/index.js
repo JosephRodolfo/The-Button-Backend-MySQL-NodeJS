@@ -12,33 +12,15 @@ const io = require("socket.io")(server, {
   },
 });
 
-let connectCounter = 0;
-
 io.on("connection", (socket) => {
-
-
-  socket.on("disconnect", (arg) => {
-    console.log("user left");
-    connectCounter--;
-    socket.emit("message", generateMessage(connectCounter));
-  });
-
-  socket.on("connected", (arg) => {
-    console.log("user joined");
-    connectCounter++;
-    socket.emit("message", generateMessage(connectCounter));
-  });
-
-
-
-  socket.on("disconnected", (arg) => {
-    console.log("user left");
-    connectCounter--;
-    socket.emit("message", generateMessage(connectCounter));
-  });
-
+  let connectCounter = io.engine.clientsCount;
   socket.emit("message", generateMessage(connectCounter));
-
+  socket.broadcast.emit("message", generateMessage(connectCounter));
+  socket.on("disconnect", () => {
+    let connectCounter = io.engine.clientsCount;
+    socket.emit("message", generateMessage(connectCounter));
+    socket.broadcast.emit("message", generateMessage(connectCounter));
+  });
 });
 
 const generateMessage = (text) => {
