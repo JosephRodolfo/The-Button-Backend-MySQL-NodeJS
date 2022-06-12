@@ -46,6 +46,8 @@ EndDate.create = (newDate, result) => {
       return;
     }
     result(null, { id: res.insertId, ...newDate });
+
+    
   });
 };
 
