@@ -3,7 +3,7 @@ const endDatesRoute = require('./endDates')
 const userRoute = require('./user')
 const highScoresRoute = require('./highScores')
 const configurationRoute = require('./configuration')
-const adminRoute = require('./admin')
+const adminRoute = require('./admin');
 const router = express.Router();
 
 const defaultRoutes = [
@@ -33,8 +33,11 @@ const defaultRoutes = [
 
 ]
 
+
+
 defaultRoutes.forEach((route) => {
     router.use(route.path, route.route);
   });
+
 
   module.exports = router;

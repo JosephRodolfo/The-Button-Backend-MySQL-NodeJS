@@ -43,6 +43,8 @@ exports.registerAdmin = (req, res) => {
 };
 
 exports.loginAdmin = async(req, res, next) => {
+  console.log("Hello!")
+    try{
   const email = req.body.email;
   const password = req.body.password;
  let user = await Admin.findByEmail(email)
@@ -73,5 +75,7 @@ exports.loginAdmin = async(req, res, next) => {
     return res.json({
       message: "Invalid email or password",
     });
+  }} catch(e){
+    console.log("error:", e)
   }
 };

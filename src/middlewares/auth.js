@@ -1,26 +1,35 @@
-const jwt = require("jsonwebtoken");
-const Admin = require("../models/Admin");
+async function verifyToken(req, res, next) {
+  const token = req.cookies.token;
+  const  jsonwebtoken  = require("jsonwebtoken");
 
-const auth = async (req, res, next) => {
-  try {
-    const token = req.header("Authorization").replace("Bearer ", "");
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const admin = await Admin.findOne({
-      _id: decoded._id,
-      "tokens.token": token,
+
+  if (token === undefined) {
+    return res.json({
+      message: "Access Denied! Unauthorized User",
     });
+  } else {
+    jsonwebtoken.verify(token, process.env.SECRET_KEY, (err, authData) => {
 
-    if (!admin) {
-      throw new Error();
-    }
+      console.log(authData);
 
-    req.token = token;
-    req.admin = admin;
-
-    next();
-  } catch (e) {
-    res.status(401).send({ error: "please authenticate" });
+      if (err) {
+        res.json({
+          message: "Invalid Token...",
+        });
+      } else {
+        // const role = authData.user.role;
+        // console.log(authData);
+        // if (email === "admin") {
+          next();
+        // } else {
+        //   return res.json({
+        //     message: "Access Denied! you are not an Admin",
+        //   });
+        // }
+      }
+    });
   }
-};
 
-module.exports = auth;
+}
+
+module.exports={verifyToken}
