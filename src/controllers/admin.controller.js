@@ -1,7 +1,6 @@
 const Admin = require("../models/Admin.model");
 const { genSaltSync, hashSync, compareSync } = require("bcrypt");
-const  jsonwebtoken  = require("jsonwebtoken");
-const cookieParser = require("cookie-parser");
+const jsonwebtoken = require("jsonwebtoken");
 
 exports.findOne = (req, res) => {
   Admin.findByEmail(req.body.email, (err, data) => {
@@ -42,40 +41,53 @@ exports.registerAdmin = (req, res) => {
   });
 };
 
-exports.loginAdmin = async(req, res, next) => {
-  console.log("Hello!")
-    try{
-  const email = req.body.email;
-  const password = req.body.password;
- let user = await Admin.findByEmail(email)
+exports.loginAdmin = async (req, res, next) => {
+  try {
+    const email = req.body.email;
+    const password = req.body.password;
+    let user = await Admin.findByEmail(email);
 
+    if (!user) {
+      return res.json({
+        message: "Invalid email or password",
+      });
+    }
+    const isValidPassword = compareSync(password, user.password);
+    if (isValidPassword) {
+      user.password = undefined;
+      const jsontoken = jsonwebtoken.sign(
+        { user: user },
+        process.env.SECRET_KEY,
+        { expiresIn: "30m" }
+      );
+      res.cookie("token", jsontoken, {
+        httpOnly: true,
+        secure: true,
+        expires: new Date(Number(new Date()) + 30 * 60 * 1000),
+      });
 
-
-  if (!user) {
-    return res.json({
-      message: "Invalid email or password",
-    });
+      res.json({ token: jsontoken });
+    } else {
+      return res.json({
+        message: "Invalid email or password",
+      });
+    }
+  } catch (e) {
+    console.log("error:", e);
   }
-  const isValidPassword = compareSync(password, user.password);
-  if (isValidPassword) {
-    user.password = undefined;
-    const jsontoken = jsonwebtoken.sign(
-      { user: user },
-      process.env.SECRET_KEY,
-      { expiresIn: "30m" }
-    );
-    res.cookie("token", jsontoken, {
-      httpOnly: true,
-      secure: true,
-      expires: new Date(Number(new Date()) + 30 * 60 * 1000),
-    }); 
+};
 
-    res.json({ token: jsontoken });
-  } else {
-    return res.json({
-      message: "Invalid email or password",
+exports.logoutAdmin = (req, res) => {
+  try {
+    res.clearCookie("token", {
+      Domain: process.env.DOMAIN,
+      Path: process.env.COOKIE_PATH,
     });
-  }} catch(e){
-    console.log("error:", e)
+
+    return res.json({
+      message: "Logged out sucessfully",
+    });
+  } catch (e) {
+    console.log("error:", e);
   }
 };
