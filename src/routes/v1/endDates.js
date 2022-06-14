@@ -11,6 +11,8 @@ router.get("/", endDates.findAll)
 router.delete("/", endDates.deleteAll)
 //gets most recent end date
 router.get("/last/date", endDates.findLastCreated)
+router.get("/first/date", endDates.findFirstCreated)
+
 
 
 

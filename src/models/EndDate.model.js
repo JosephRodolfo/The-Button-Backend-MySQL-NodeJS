@@ -38,6 +38,25 @@ EndDate.findLast = (result) => {
   );
 };
 
+EndDate.findFirst = (result) => {
+  sql.query(
+    `SELECT * FROM dates WHERE id =(SELECT MIN( id ) FROM dates);`,
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+      if (res.length) {
+        // console.log("found endDate: ", res[0]);
+        result(null, res[0]);
+        return;
+      }
+      result({ kind: "not_found" }, null);
+    }
+  );
+};
+
 EndDate.create = (newDate, result) => {
   sql.query("INSERT INTO dates SET ?", newDate, (err, res) => {
     if (err) {

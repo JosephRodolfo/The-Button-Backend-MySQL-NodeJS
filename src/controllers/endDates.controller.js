@@ -16,6 +16,22 @@ exports.findOne = (req, res) => {
     } else res.send(data);
   });
 };
+exports.findFirstCreated = (req, res) => {
+  EndDate.findFirst((err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found most first inserted end date`,
+        });
+      } else {
+        res.status(500).send({
+          message: "Error retrieving first inserted end date",
+        });
+      }
+    } else res.send(data);
+  });
+};
+
 
 exports.findLastCreated = (req, res) => {
   EndDate.findLast((err, data) => {
