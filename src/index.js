@@ -1,14 +1,15 @@
 const { app } = require("../src/app");
 
-const port = 2000;
+const port = process.env.PORT || 2000;
 
 const server = app.listen(port, () => {
   console.log(`App listening on port ${port}`);
 });
 
+
 const io = require("socket.io")(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: process.env.ORIGIN,
   },
 });
 
