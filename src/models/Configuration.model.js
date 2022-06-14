@@ -33,7 +33,7 @@ const Configuration = function (configuration) {
           result({ kind: "not_found" }, null);
           return;
         }
-        console.log("updated configuration: ", { id: id, ...configuration });
+        // console.log("updated configuration: ", { id: id, ...configuration });
         result(null, { id: id, ...configuration });
       }
     );

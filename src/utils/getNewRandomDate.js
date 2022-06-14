@@ -2,8 +2,8 @@
 
 const config = require("../config");
 
-function getNewRandomDate() {
-  let newDate = new Date(+new Date() + Math.floor(Math.random() * config.speed)+ 2000) //1000000
+function getNewRandomDate(duration) {
+  let newDate = new Date(+new Date() + Math.floor(Math.random() * duration)+ 2000) //1000000
 
     return parseInt((newDate.getTime() / 1000).toFixed(0))
 }

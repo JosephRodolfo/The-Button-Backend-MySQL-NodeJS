@@ -4,7 +4,7 @@ const configuration = require('../../controllers/configuration.controller')
 const {verifyToken} = require('../../middlewares/auth')
 
 
-router.get('/:id', verifyToken, configuration.findById)
+router.get('/:id', configuration.findById)
 router.put('/:id', verifyToken, configuration.update)
 
 
