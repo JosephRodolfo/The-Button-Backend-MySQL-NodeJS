@@ -15,19 +15,14 @@ if (process.env.NODE_ENV === "development") {
   };
 }
 if (process.env.NODE_ENV === "production") {
-  const host = process.ENV.CLEARDB_DATABASE_URL;
-  const user = process.ENV.USERNAME;
-  const password = process.ENV.PASSWORD;
-  const database = process.ENV.DB;
-  const speed = 1000000;
 
   module.exports = {
     // host: 'localhost',
-    host: host,
-    user: user,
-    password: password,
-    database: database,
-    speed: speed,
+    host:  process.ENV.CLEARDB_DATABASE_URL,
+    user: process.ENV.USERNAME,
+    password: process.ENV.PASSWORD,
+    database: process.ENV.DB,
+    speed: 1000000,
   };
 }
 // if(['production', 'staging'].indexOf(process.env.NODE_ENV) >= 0) {
