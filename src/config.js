@@ -17,11 +17,10 @@ if (process.env.NODE_ENV === "development") {
 if (process.env.NODE_ENV === "production") {
 
   module.exports = {
-    // host: 'localhost',
-    host: process.ENV.HOST,
-    user: process.ENV.USERNAME,
-    password: process.ENV.PASSWORD,
-    database: process.ENV.DB,
+    host: process.env.HOST,
+    user: process.env.USERNAME,
+    password: process.env.PASSWORD,
+    database: process.env.DB,
     speed: 1000000,
     port: 3306
   };
