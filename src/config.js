@@ -18,11 +18,12 @@ if (process.env.NODE_ENV === "production") {
 
   module.exports = {
     // host: 'localhost',
-    host:  process.ENV.CLEARDB_DATABASE_URL,
+    host: process.ENV.HOST,
     user: process.ENV.USERNAME,
     password: process.ENV.PASSWORD,
     database: process.ENV.DB,
     speed: 1000000,
+    port: 3306
   };
 }
 // if(['production', 'staging'].indexOf(process.env.NODE_ENV) >= 0) {
